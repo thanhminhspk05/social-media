@@ -1,7 +1,12 @@
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch } from '@mui/material';
 import { route } from './../route';
-const Sidebar = () => {
+
+type SidebarProps = {
+  handleSetMode: () => void;
+};
+
+const Sidebar = ({ handleSetMode }: SidebarProps) => {
   return (
     <Box
       flex={1}
@@ -32,7 +37,7 @@ const Sidebar = () => {
               <ListItemIcon>
                 <DarkModeIcon />
               </ListItemIcon>
-              <Switch />
+              <Switch onClick={handleSetMode} />
             </ListItemButton>
           </ListItem>
         </List>

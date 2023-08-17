@@ -10,10 +10,11 @@ import {
   Typography,
 } from '@mui/material';
 
-import { generateInfo } from '../utils';
+import { generateInfo, generateMassage } from '../utils';
 
 const Rightbar = () => {
   const data = generateInfo(10);
+  const masage = generateMassage(10);
 
   return (
     <Box
@@ -26,7 +27,7 @@ const Rightbar = () => {
         },
       }}
     >
-      <Box position="fixed">
+      <Box position="absolute">
         <Typography
           variant="h6"
           fontWeight={100}
@@ -34,7 +35,7 @@ const Rightbar = () => {
           Online Friends
         </Typography>
 
-        <AvatarGroup max={14}>
+        <AvatarGroup max={10}>
           {data.map((item, index) => (
             <Avatar
               key={index}
@@ -67,30 +68,20 @@ const Rightbar = () => {
           ))}
         </ImageList>
 
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar
-              alt="Cindy Baker"
-              src="/static/images/avatar/3.jpg"
+        {data.map((item, index) => (
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar
+                alt={item}
+                src={`https://source.unsplash.com/random/200x200${Math.floor(Math.random() * 1000)}`}
+              />
+            </ListItemAvatar>
+            <ListItemText
+              primary={item}
+              secondary={masage[index]}
             />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Oui Oui"
-            secondary={
-              <>
-                <Typography
-                  sx={{ display: 'inline' }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  Sandra Adams
-                </Typography>
-                {' — Do you have Paris recommendations? Have you ever…'}
-              </>
-            }
-          />
-        </ListItem>
+          </ListItem>
+        ))}
       </Box>
     </Box>
   );

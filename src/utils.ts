@@ -13,3 +13,14 @@ export const generateInfo = (number: number) => {
     }
     return randomNames
 }
+
+export const generateMassage = (number: number) => {
+  const randomMassage = [];
+  const massages = ["Hi [name], welcome!", "How are you, [name]?", "Nice to meet you, [name]!", "I hope you're having a great day, [name]!","Why did the scarecrow win an award? Because he was outstanding in his field!", "What do you call a fish with no eyes? Fsh!", "Why did the bicycle fall over? Because it was two tired!"];
+
+  for (let i = 0; i < number; i++) {
+    const randomIndex = Math.floor(Math.random() * massages.length);
+    randomMassage.push(massages[randomIndex]);
+  }
+  return randomMassage
+}

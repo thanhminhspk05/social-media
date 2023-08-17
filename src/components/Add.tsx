@@ -1,17 +1,24 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Fab, Modal, Tooltip, Typography } from '@mui/material';
+import ImageIcon from '@mui/icons-material/Image';
+import MoodIcon from '@mui/icons-material/Mood';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import { Avatar, Box, Button, Fab, Modal, Stack, TextField, Tooltip, Typography, styled } from '@mui/material';
+
 import { useState } from 'react';
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
+const StyledModal = styled(Modal)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+const UserBox = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
+  marginBottom: '20px',
+});
 
 const Add = () => {
   const [open, setOpen] = useState(false);
@@ -30,29 +37,76 @@ const Add = () => {
         </Fab>
       </Tooltip>
 
-      <Modal
+      <StyledModal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={{ padding: 0 }}
       >
-        <Box sx={style}>
+        <Box
+          width={400}
+          height={280}
+          bgcolor="white"
+          p={3}
+          borderRadius={5}
+        >
           <Typography
-            id="modal-modal-title"
             variant="h6"
-            component="h2"
+            color="gray"
+            textAlign="center"
           >
-            Add 
+            Create post
           </Typography>
-          <Typography
-            id="modal-modal-description"
-            sx={{ mt: 2 }}
+
+          <UserBox>
+            <Avatar
+              sx={{
+                width: '32px',
+                height: '32px',
+              }}
+              src={`https://source.unsplash.com/random/200x200${Math.floor(Math.random() * 1000)}`}
+            />
+            <Typography>John Doe</Typography>
+          </UserBox>
+
+          <TextField
+            id="multi-text"
+            multiline
+            rows={4}
+            placeholder="What's on your mind? "
+            variant="standard"
+            sx={{ width: '100%' }}
+          />
+
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+            <Stack
+              direction="row"
+              gap={1}
+              alignItems="center"
+              marginTop={1}
+            >
+              <MoodIcon color="primary" />
+              <ImageIcon color="secondary" />
+              <VideocamIcon color="success" />
+              <PersonAddIcon color="error" />
+            </Stack>
+
+            <Stack marginTop={1}>
+              <Button
+                size="small"
+                variant="contained"
+              >
+                Post
+              </Button>
+            </Stack>
+          </Box>
         </Box>
-      </Modal>
+      </StyledModal>
     </>
   );
 };
